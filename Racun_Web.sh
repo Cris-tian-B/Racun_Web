@@ -42,19 +42,19 @@ run_nmap() {
 	read -p "Choose a mode: " mode
 	case $mode in
 		1)
-		echo -e "${BLUE}[*] Ejecutando Nmap...${NC}"
+		echo -e "${BLUE}[*] Running Nmap...${NC}"
 		nmap -sS -T0 -f -n -Pn --scan-delay 10s -D RND:5 "$TARGET" -oG "$BASE_DIR/nmap_scan"
 		;;
 		2)
-		echo -e "${BLUE}[*] Ejecutando Nmap...${NC}"
+		echo -e "${BLUE}[*] Running Nmap...${NC}"
 		nmap -sSC -sV -p- --open --min-rate 5000 -vvv -n "$TARGET" -oG "$BASE_DIR/nmap_scan"
 		;;
 		3)
-		echo -e "${BLUE}[*] Ejecutando Nmap...${NC}"
+		echo -e "${BLUE}[*] Running Nmap...${NC}"
 		nmap -sS -T4 -p- --open -n -Pn "$TARGET" -oG "$BASE_DIR/nmap_scan"
 		;;
 		4)
-		echo -e "${BLUE}[*] Ejecutando Nmap...${NC}"
+		echo -e "${BLUE}[*] Running Nmap...${NC}"
 		nmap -sS -T4 -F -n -Pn "$TARGET" -oG "$BASE_DIR/nmap_scan"
 		;;
 		*) echo -e "${RED}[!] Not valid option${NC}";;
@@ -109,7 +109,7 @@ run_nikto() {
 
 run_sqlmap() {
     echo -e "${BLUE}[*] Running SQLMap...${NC}"
-    read -p "  URL completa con parámetro (ej. http://$TARGET/page?id=1): " sql_url
+    read -p "  URL with parameter (http://$TARGET/page?id=1): " sql_url
     if [ -n "$sql_url" ]; then
         sqlmap -u "$sql_url" --batch --level=2 --risk=2 --output-dir="$BASE_DIR/sqlmap"
         echo -e "${GREEN}[+] SQLMap completed. Results in $BASE_DIR/sqlmap${NC}"
